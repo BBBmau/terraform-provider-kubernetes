@@ -2,16 +2,7 @@
     <img src=".github/tf.png" alt="Terraform logo" title="Terraform" align="left" height="50" />
 </a>
 
-# Kubernetes Provider for Terraform [![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/hashicorp/terraform-provider-kubernetes?label=release)](https://github.com/hashicorp/terraform-provider-kubernetes/releases) [![license](https://img.shields.io/github/license/hashicorp/terraform-provider-kubernetes.svg)]()
-
-- [Getting Started](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/guides/getting-started)
-- [Interactive Tutorial](https://learn.hashicorp.com/tutorials/terraform/kubernetes-provider?in=terraform/kubernetes)
-- Usage
-  - [Documentation](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs)
-  - [Examples](https://github.com/hashicorp/terraform-provider-kubernetes/tree/main/_examples)
-  - [Kubernetes Provider 2.0 Upgrade guide](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/guides/v2-upgrade-guide)
-- Mailing list: [Google Groups](http://groups.google.com/group/terraform-tool)
-- Chat: [#terraform-providers in Kubernetes](https://kubernetes.slack.com/messages/CJY6ATQH4) ([Sign up here](http://slack.k8s.io/))
+# Kubernetes Provider for Terraform [![Gies/CJY6ATQH4) ([Sign up here](http://slack.k8s.io/))
 
 The Kubernetes provider for Terraform is a plugin that enables full lifecycle management of Kubernetes resources. This provider is maintained internally by HashiCorp.
 
