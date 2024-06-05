@@ -20,7 +20,7 @@ jobs:
                 const { PAGERDUTY_TOKEN } = process.env
                 const { api } = require('@pagerduty/pdjs');
                 const pd = api({token: PAGERDUTY_TOKEN});
-                pd.get('/schedules/id/users')
+                pd.get('/schedules/PG3X8HK/users')
                   .then((response) => {
                     console.log("Assigning to " + response.users);
                   }).catch(console.error)
