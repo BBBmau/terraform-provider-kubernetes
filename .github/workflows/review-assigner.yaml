@@ -22,7 +22,7 @@ jobs:
                 const pd = api({token: PAGERDUTY_TOKEN});
                 pd.get('/schedules/PG3X8HK/users')
                   .then(({response}) => {
-                    console.log("Assigning to " + response[0].name);
+                    console.log(response);
                   }).catch(console.error)
 
                 console.log("triggered by: " + context.eventName)
