@@ -26,6 +26,9 @@ jobs:
                      } catch(error){
                          core.setFailed("error assigning assignee:" + error)
                      }
+                     else if (context.eventName === "pull_request") {
+                        const pullNumber = context.payload.pull_request?.number;
+                        const pullRequestNumber = context.payload.pull_request ? context.payload.pull_request.number : null;
                  }
                  if (context.eventName == "pull_request"){
                      try{
@@ -33,7 +36,9 @@ jobs:
                              owner: context.repo.owner,
                              repo: context.repo.repo,
                              reviewers: ["BBBmau"], // this will be replaced with pagerduty resp
-                             pull_number: context.payload.issue.number,
+                             pull_number: context.issue.number,
+                             pull_number: pullRequestNumber,
+
                          })
                      } catch(error){
                          core.setFailed("error assigning reviewer:" + error)
