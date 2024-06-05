@@ -24,7 +24,8 @@ jobs:
                 //  .then(({response}) => {
                 //    console.log(response);
                 //  }).catch(console.error)
-                console.log(context.payload.pull_request.number)
+                console.log(context.issue.number - 1)
+                console.log(context.payload.pull_request.number - 1)
 
                 console.log("triggered by: " + context.eventName)
                  if (context.eventName == "issues"){
