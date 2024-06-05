@@ -24,9 +24,7 @@ jobs:
                 //  .then(({response}) => {
                 //    console.log(response);
                 //  }).catch(console.error)
-                console.log(context.issue.number - 1)
-                console.log(context.payload.pull_request.number - 1)
-
+                console.log(context.issue.number)
                 console.log("triggered by: " + context.eventName)
                  if (context.eventName == "issues"){
                      try{
@@ -46,7 +44,7 @@ jobs:
                              owner: context.repo.owner,
                              repo: context.repo.repo,
                              reviewers: ["BBBmau"], // this will be replaced with pagerduty resp
-                             pull_number: (context.payload.pull_request.number - 1), // for some reason we get PR+1 from context
+                             pull_number: context.issue.number, // for some reason we get PR+1 from context
                          })
                      } catch(error){
                          core.setFailed("error assigning reviewer:" + error)
