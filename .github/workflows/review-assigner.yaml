@@ -7,7 +7,7 @@ on:
         types: [opened]
 
 jobs:
-  create-branch:
+  assign-reviewer:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/github-script@e69ef5462fd455e02edcaf4dd7708eda96b9eda0 # v7.0.0
@@ -38,6 +38,7 @@ jobs:
                              reviewers: ["BBBmau"], // this will be replaced with pagerduty resp
                              pull_number: context.issue.number,
                              pull_number: pullRequestNumber,
+
                          })
                      } catch(error){
                          core.setFailed("error assigning reviewer:" + error)
