@@ -21,7 +21,7 @@ jobs:
                 const pdjs = require('@pagerduty/pdjs');
                 const pd = pdjs({token: '${PAGERDUTY_TOKEN}'});
                 pd.get('/schedules/id/users').then({response} {
-                    console.log("Assigning to " + response.users[0].name)
+                    console.log("Assigning to " + response.users[0].name);
                 }).catch(console.error)
 
                 console.log("triggered by: " + context.eventName)
