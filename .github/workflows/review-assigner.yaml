@@ -44,7 +44,7 @@ jobs:
                          await github.rest.pulls.requestReviewers({
                              owner: context.repo.owner,
                              repo: context.repo.repo,
-                             reviewers: ["BBBmau"], // this will be replaced with pagerduty resp
+                             reviewers: ["sheneska"], // this will be replaced with pagerduty resp
                              pull_number: context.issue.number, // for some reason we get PR+1 from context
                          })
                      } catch(error){
