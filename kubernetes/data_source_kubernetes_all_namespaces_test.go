@@ -10,6 +10,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 )
 
+// func
 func TestAccKubernetesDataSourceAllNamespaces_basic(t *testing.T) {
 	dataSourceName := "data.kubernetes_all_namespaces.test"
 	rxPosNum := regexp.MustCompile("^[1-9][0-9]*$")
