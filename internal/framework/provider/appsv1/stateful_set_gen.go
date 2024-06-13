@@ -1,4 +1,4 @@
-package corev1
+package appsv1
 
 import (
 	"context"
@@ -9,28 +9,28 @@ import (
 )
 
 // Ensure provider defined types fully satisfy framework interfaces.
-var _ resource.Resource = &Secret{}
-var _ resource.ResourceWithImportState = &Secret{}
+var _ resource.Resource = &StatefulSet{}
+var _ resource.ResourceWithImportState = &StatefulSet{}
 
-func NewSecret() resource.Resource {
-	return &Secret{
-		Kind:       "Secret",
-		APIVersion: "v1",
+func NewStatefulSet() resource.Resource {
+	return &StatefulSet{
+		Kind:       "StatefulSet",
+		APIVersion: "apps/v1",
 	}
 }
 
-type Secret struct {
+type StatefulSet struct {
 	APIVersion string
 	Kind       string
 
 	clientGetter client.KubernetesClientGetter
 }
 
-func (r *Secret) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
-	resp.TypeName = "kubernetes_secret_v1_gen"
+func (r *StatefulSet) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
+	resp.TypeName = "kubernetes_stateful_set_v1_gen"
 }
 
-func (r *Secret) Configure(ctx context.Context, req resource.ConfigureRequest, resp *resource.ConfigureResponse) {
+func (r *StatefulSet) Configure(ctx context.Context, req resource.ConfigureRequest, resp *resource.ConfigureResponse) {
 	// Prevent panic if the provider has not been configured.
 	if req.ProviderData == nil {
 		return
