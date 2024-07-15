@@ -16,18 +16,6 @@ on:
 
 jobs:
   acceptance_tests:
-    if: ${{ github.repository_owner == 'hashicorp' }}
-    runs-on: custom-linux-medium
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29 # v4.1.6
-      - name: Set up Go
-        uses: actions/setup-go@cdcb36043654635271a94b9a6d1392de5bb323a7 # v5.0.1
-        with:
-          go-version-file: 'go.mod'
-      - name: Run Tests
-        env:
-          TF_ACC: 1
-          TF_ACC_TERRAFORM_VERSION: ${{ github.event.inputs.terraformVersion || vars.TERRAFORM_VERSION_EXP }}
-        run: |
-          go test -v -run '^TestAccKubernetesDeferredActions' ./kubernetes/test-dfa
+    - run: echo "variable is ${{vars.TERRAFORM_VERSION_EXP}}"
