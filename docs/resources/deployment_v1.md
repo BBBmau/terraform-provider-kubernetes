@@ -67,7 +67,7 @@ Optional:
 Required:
 
 - `metadata` (Block List, Min: 1, Max: 1) Standard pod's metadata. More info: https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/api-conventions.md#metadata (see [below for nested schema](#nestedblock--spec--template--metadata))
-- `spec` (Block List, Min: 1, Max: 1) Spec defines the specification of the desired behavior of the deployment. More info: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.9/#deployment-v1-apps (see [below for nested schema](#nestedblock--spec--template--spec))
+- `spec` (Block List, Min: 1, Max: 1) Spec defines the specification of the desired behavior of the deployment. More info: https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/deployment-v1/ (see [below for nested schema](#nestedblock--spec--template--spec))
 
 <a id="nestedblock--spec--template--metadata"></a>
 ### Nested Schema for `spec.template.metadata`
@@ -111,7 +111,7 @@ Optional:
 - `os` (Block List, Max: 1) Specifies the OS of the containers in the pod. (see [below for nested schema](#nestedblock--spec--template--spec--os))
 - `priority_class_name` (String) If specified, indicates the pod's priority. "system-node-critical" and "system-cluster-critical" are two special keywords which indicate the highest priorities with the former being the highest priority. Any other name must be defined by creating a PriorityClass object with that name. If not specified, the pod priority will be default or zero if there is no default.
 - `readiness_gate` (Block List) If specified, all readiness gates will be evaluated for pod readiness. A pod is ready when all its containers are ready AND all conditions specified in the readiness gates have status equal to "True" More info: https://git.k8s.io/enhancements/keps/sig-network/0007-pod-ready%2B%2B.md (see [below for nested schema](#nestedblock--spec--template--spec--readiness_gate))
-- `restart_policy` (String) Restart policy for all containers within the pod. One of Always, OnFailure, Never. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#restart-policy.
+- `restart_policy` (String) Restart policy for all containers within the pod. Defaults to Always as the only option. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#restart-policy.
 - `runtime_class_name` (String) RuntimeClassName is a feature for selecting the container runtime configuration. The container runtime configuration is used to run a Pod's containers. More info: https://kubernetes.io/docs/concepts/containers/runtime-class
 - `scheduler_name` (String) If specified, the pod will be dispatched by specified scheduler. If not specified, the pod will be dispatched by default scheduler.
 - `security_context` (Block List, Max: 1) SecurityContext holds pod-level security attributes and common container settings. Optional: Defaults to empty (see [below for nested schema](#nestedblock--spec--template--spec--security_context))
@@ -898,6 +898,13 @@ Optional:
 - `read_only` (Boolean) Mounted read-only if true, read-write otherwise (false or unspecified). Defaults to false.
 - `sub_path` (String) Path within the volume from which the container's volume should be mounted. Defaults to "" (volume's root).
 
+<a id="nestedblock--spec--template--spec--container--volume_device"></a>
+### Nested Schema for `spec.template.spec.container.volume_device`
+
+Required:
+
+- `device_path` (String) Path within the container at which the volume device should be attached. For example '/dev/xvda'.
+- `name` (String) This must match the Name of a PersistentVolumeClaim.
 
 
 <a id="nestedblock--spec--template--spec--dns_config"></a>
@@ -1450,6 +1457,13 @@ Optional:
 - `read_only` (Boolean) Mounted read-only if true, read-write otherwise (false or unspecified). Defaults to false.
 - `sub_path` (String) Path within the volume from which the container's volume should be mounted. Defaults to "" (volume's root).
 
+<a id="nestedblock--spec--template--spec--init_container--volume_device"></a>
+### Nested Schema for `spec.template.spec.init_container.volume_device`
+
+Required:
+
+- `device_path` (String) Path within the container at which the volume device should be attached. For example '/dev/xvda'.
+- `name` (String) This must match the Name of a PersistentVolumeClaim.
 
 
 <a id="nestedblock--spec--template--spec--os"></a>

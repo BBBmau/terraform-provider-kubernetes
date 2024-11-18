@@ -906,6 +906,13 @@ Optional:
 - `read_only` (Boolean) Mounted read-only if true, read-write otherwise (false or unspecified). Defaults to false.
 - `sub_path` (String) Path within the volume from which the container's volume should be mounted. Defaults to "" (volume's root).
 
+<a id="nestedblock--spec--template--spec--container--volume_device"></a>
+### Nested Schema for `spec.template.spec.container.volume_device`
+
+Required:
+
+- `device_path` (String) Path within the container at which the volume device should be attached. For example '/dev/xvda'.
+- `name` (String) This must match the Name of a PersistentVolumeClaim.
 
 
 <a id="nestedblock--spec--template--spec--dns_config"></a>
@@ -1458,6 +1465,13 @@ Optional:
 - `read_only` (Boolean) Mounted read-only if true, read-write otherwise (false or unspecified). Defaults to false.
 - `sub_path` (String) Path within the volume from which the container's volume should be mounted. Defaults to "" (volume's root).
 
+<a id="nestedblock--spec--template--spec--init_container--volume_device"></a>
+### Nested Schema for `spec.template.spec.init_container.volume_device`
+
+Required:
+
+- `device_path` (String) Path within the container at which the volume device should be attached. For example '/dev/xvda'.
+- `name` (String) This must match the Name of a PersistentVolumeClaim.
 
 
 <a id="nestedblock--spec--template--spec--os"></a>

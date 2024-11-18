@@ -61,6 +61,7 @@ Optional:
 - `revision_history_limit` (Number) The maximum number of revisions that will be maintained in the StatefulSet's revision history. The default value is 10.
 - `update_strategy` (Block List) The strategy that the StatefulSet controller will use to perform updates. (see [below for nested schema](#nestedblock--spec--update_strategy))
 - `volume_claim_template` (Block List) A list of claims that pods are allowed to reference. Every claim in this list must have at least one matching (by name) volumeMount in one container in the template. (see [below for nested schema](#nestedblock--spec--volume_claim_template))
+- `min_ready_seconds` - (Optional) - Minimum number of seconds for which a newly created pod should be ready without any of its container crashing for it to be considered available. Defaults to 0. (pod will be considered available as soon as it is ready)
 
 <a id="nestedblock--spec--selector"></a>
 ### Nested Schema for `spec.selector`
@@ -921,6 +922,13 @@ Optional:
 - `read_only` (Boolean) Mounted read-only if true, read-write otherwise (false or unspecified). Defaults to false.
 - `sub_path` (String) Path within the volume from which the container's volume should be mounted. Defaults to "" (volume's root).
 
+<a id="nestedblock--spec--template--spec--container--volume_device"></a>
+### Nested Schema for `spec.template.spec.container.volume_device`
+
+Required:
+
+- `device_path` (String) Path within the container at which the volume device should be attached. For example '/dev/xvda'.
+- `name` (String) This must match the Name of a PersistentVolumeClaim.
 
 
 <a id="nestedblock--spec--template--spec--dns_config"></a>
@@ -1473,6 +1481,13 @@ Optional:
 - `read_only` (Boolean) Mounted read-only if true, read-write otherwise (false or unspecified). Defaults to false.
 - `sub_path` (String) Path within the volume from which the container's volume should be mounted. Defaults to "" (volume's root).
 
+<a id="nestedblock--spec--template--spec--init_container--volume_device"></a>
+### Nested Schema for `spec.template.spec.init_container.volume_device`
+
+Required:
+
+- `device_path` (String) Path within the container at which the volume device should be attached. For example '/dev/xvda'.
+- `name` (String) This must match the Name of a PersistentVolumeClaim.
 
 
 <a id="nestedblock--spec--template--spec--os"></a>
@@ -2361,6 +2376,7 @@ resource "kubernetes_stateful_set_v1" "prometheus" {
   }
 
   spec {
+    min_ready_seconds      = 10
     pod_management_policy  = "Parallel"
     replicas               = 1
     revision_history_limit = 5
@@ -2395,6 +2411,11 @@ resource "kubernetes_stateful_set_v1" "prometheus" {
             name       = "prometheus-data"
             mount_path = "/data"
             sub_path   = ""
+          }
+
+          volume_device {
+            name        = "prometheus-device"
+            device_path = "/dev/xvda"
           }
         }
 
@@ -2467,6 +2488,11 @@ resource "kubernetes_stateful_set_v1" "prometheus" {
             sub_path   = ""
           }
 
+          volume_device {
+            name        = "prometheus-device"
+            device_path = "/dev/xvda"
+          }
+
           readiness_probe {
             http_get {
               path = "/-/ready"
@@ -2517,6 +2543,24 @@ resource "kubernetes_stateful_set_v1" "prometheus" {
       spec {
         access_modes       = ["ReadWriteOnce"]
         storage_class_name = "standard"
+
+        resources {
+          requests = {
+            storage = "16Gi"
+          }
+        }
+      }
+    }
+
+    volume_claim_template {
+      metadata {
+        name = "prometheus-device"
+      }
+
+      spec {
+        access_modes       = ["ReadWriteOnce"]
+        storage_class_name = "local-storage"
+        volume_mode        = "Block"
 
         resources {
           requests = {
